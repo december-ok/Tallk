@@ -13,8 +13,8 @@ function Talk() {
 			<Router>
 				<div className="contents">
 					<Switch>
-						<Route path="/auth" exact />
-						<Route path="/" exact component={Main} />
+						<Route path="/" component={Main} />
+						<Route path="/auth" />
 					</Switch>
 				</div>
 			</Router>

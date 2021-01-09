@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../modules/user';
+import ChatRoomList from './ChatRoomList/ChatRoomList';
+import { Websocket } from './Websocket';
 
 function Main() {
 	const store = useSelector((state) => state);
@@ -18,7 +20,19 @@ function Main() {
 		};
 
 		getUserData();
+		Websocket.open();
+		return () => {
+			Websocket.close();
+		};
 	}, []);
+
+	if (!store.user.loaded) {
+		return (
+			<div className="Main">
+				<h1>Loading...</h1>
+			</div>
+		);
+	}
 
 	return (
 		<div className="Main">
@@ -26,6 +40,8 @@ function Main() {
 				<div className="contents">
 					<Switch>
 						<Route path="/" exact component={Home} />
+						<Route path="/chats" exact component={ChatRoomList} />
+						<Route path="/chats/:id" exact />
 					</Switch>
 				</div>
 			</Router>

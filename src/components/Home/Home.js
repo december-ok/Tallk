@@ -3,12 +3,18 @@ import ProfileBlock from './ProfileBlock';
 
 function Home() {
 	const store = useSelector((state) => state);
+	// console.log(store);
+
 	return (
 		<div className="Home">
 			<h1>Home</h1>
 			<div className="Content">
 				{JSON.stringify(store)}
-				<ProfileBlock />
+				<ProfileBlock user={store.user} />
+				<h5 className="friendIndex">친구 {store.user.friendsList.length}</h5>
+				{store.user.friendsList.map((item) => (
+					<ProfileBlock user={item} key={item._id} />
+				))}
 			</div>
 		</div>
 	);
