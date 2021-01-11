@@ -19,8 +19,18 @@ export const Websocket = (() => {
 				console.log(error);
 			}
 		},
+		send: (messageObject) => {
+			try {
+				ws.send(JSON.stringify(messageObject));
+			} catch (error) {
+				console.log(error);
+			}
+		},
 		close: () => {
-			if (ws) ws.close();
+			if (ws) {
+				ws.close();
+				console.log('closed');
+			}
 		},
 	};
 })();

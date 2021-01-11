@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../modules/user';
 import ChatRoomList from './ChatRoomList/ChatRoomList';
-import { Websocket } from './Websocket';
+import { Websocket } from './Websocket/WebSocket';
 
 function Main() {
 	const store = useSelector((state) => state);
@@ -39,9 +39,9 @@ function Main() {
 			<Router>
 				<div className="contents">
 					<Switch>
-						<Route path="/" exact component={Home} />
-						<Route path="/chats" exact component={ChatRoomList} />
-						<Route path="/chats/:id" exact />
+						<Route path="/chats/:id" />
+						<Route path="/chats" component={ChatRoomList} />
+						<Route path="/" component={Home} />
 					</Switch>
 				</div>
 			</Router>
