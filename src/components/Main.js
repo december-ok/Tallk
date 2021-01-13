@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../modules/user';
 import ChatRoomList from './ChatRoomList/ChatRoomList';
 import { Websocket } from './Websocket/WebSocket';
+import { initRoom } from '../modules/room';
+import ChatRoom from './ChatRoom/ChatRoom';
+import { base_uri } from '../modules';
 
 function Main() {
 	const store = useSelector((state) => state);
@@ -14,8 +17,10 @@ function Main() {
 	const userId = '5ff854bdd17cbf4f8ce728be';
 	useEffect(() => {
 		const getUserData = async () => {
-			const message = `http://localhost:4000/api/getUser?id=`;
+			const message = `${base_uri}/api/getUser?id=`;
 			const { data } = await axios.get(message + userId);
+			dispatch(initRoom(data));
+			//가장 마지막에
 			dispatch(setUser(data));
 		};
 
@@ -39,8 +44,10 @@ function Main() {
 			<Router>
 				<div className="contents">
 					<Switch>
-						<Route path="/chats/:id" />
+						<Route path="/profile/:id" />
+						<Route path="/chats/:id" component={ChatRoom} />
 						<Route path="/chats" component={ChatRoomList} />
+						<Route path="/:id">No such Page</Route>
 						<Route path="/" component={Home} />
 					</Switch>
 				</div>

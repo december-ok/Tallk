@@ -6,8 +6,9 @@ function ChatRoomList() {
 	return (
 		<div className="ChatRoomList">
 			<h1>Chats</h1>
-			{store.user.roomList.map((item) => (
-				<ChatRoomBlock info={item} />
+			{/* sort function 추가하기~!!!!!!! */}
+			{Array.from(store.room.entries()).map((item) => (
+				<ChatRoomBlock info={item[1]} key={item[1]._id} />
 			))}
 		</div>
 	);
