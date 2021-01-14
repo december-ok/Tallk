@@ -22,10 +22,10 @@ function Main() {
 			dispatch(initRoom(data));
 			//가장 마지막에
 			dispatch(setUser(data));
+			Websocket.open(data._id);
 		};
 
 		getUserData();
-		Websocket.open();
 		return () => {
 			Websocket.close();
 		};

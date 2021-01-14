@@ -23,9 +23,9 @@ export const addPrevChatObjList = (roomId, chatObjList) => ({
 	type: ADD_PREV_CHATOBJLIST,
 	data: { roomId, chatObjList },
 });
-export const addRealChat = (roomId, chatObj) => ({
+export const addRealChat = (roomId, chat) => ({
 	type: ADD_REAL_CHAT,
-	data: { roomId, chatObj },
+	data: { roomId, chat },
 });
 
 const initialState = new Map();
@@ -65,8 +65,8 @@ export default function room(state = initialState, action) {
 			return newMap;
 		case ADD_REAL_CHAT:
 			obj = state.get(action.data.roomId);
-			obj.chatIdList.push(action.chatObj._id);
-			obj.chatObjList.push(action.chatObj);
+			obj.chatIdList.push(action.data.chat._id);
+			obj.chatObjList.push(action.data.chat);
 			newMap.set(action.roomId, obj);
 			return newMap;
 		default:

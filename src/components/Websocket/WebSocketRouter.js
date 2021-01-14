@@ -1,6 +1,7 @@
 import { getReadChat, getRealTimeChat } from './WebSocketController';
 
-export const WebSocketRouter = (messageObject, ws) => {
+export const WebSocketRouter = (messageObject) => {
+	console.log(messageObject);
 	const { type, data } = messageObject;
 
 	switch (type) {

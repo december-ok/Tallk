@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { base_uri } from '../..';
 import { addPrevChatObjList } from '../../modules/room';
+import { Websocket } from '../Websocket/WebSocket';
 import ChatBox from './ChatBox';
 
 function ChatRoom() {
@@ -11,19 +12,34 @@ function ChatRoom() {
 	const dispatch = useDispatch();
 
 	const { id } = useParams();
+	const inputBox = useRef();
 	const info = store.room.get(id);
 
 	useEffect(() => {
 		const getChatRoom = async (from, amount) => {
-			const message = `${base_uri}/api/getRoomChat?roomId=${info._id}&from=${from}&amout=${amount}`;
+			const message = `${base_uri}/api/getRoomChat?roomId=${info._id}&from=${from}&amount=${amount}`;
 			const { data } = await axios.get(message);
 			dispatch(addPrevChatObjList(id, data));
 			info.chatLoaded = true;
+
+			// console.log(data);
 		};
-		if (!info.chatLoaded) {
+		if (info.chatIdList.length && !info.chatLoaded) {
 			getChatRoom(info.chatIdList[info.chatIdList.length - 1], 50);
 		}
 	}, []);
+
+	const sendChat = () => {
+		Websocket.send({
+			type: 'sendRealTimeChat',
+			data: {
+				userId: store.user._id,
+				roomId: info._id,
+				chat: inputBox.current.value,
+			},
+		});
+		inputBox.current.value = '';
+	};
 
 	if (!info.chatLoaded) {
 		return <div className="ChatRoom">Loading...</div>;
@@ -46,8 +62,8 @@ function ChatRoom() {
 
 			<div className="ChatBottom">
 				<i className="far fa-plus-square" />
-				<input className="ChatInput"></input>
-				<button className="ChatButton">
+				<input className="ChatInput" ref={inputBox}></input>
+				<button className="ChatButton" onClick={sendChat}>
 					<i className="fas fa-arrow-right" />
 				</button>
 			</div>
