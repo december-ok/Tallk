@@ -58,7 +58,7 @@ export default function room(state = initialState, action) {
 		// 	return newMap;
 		case ADD_PREV_CHATOBJLIST:
 			obj = state.get(action.data.roomId);
-			obj.chatObjList.unshift(...action.chatObjList);
+			obj.chatObjList.unshift(...action.data.chatObjList);
 			obj.chatLoaded = true;
 			obj.lastLoaded = obj.chatObjList[0]._id;
 			newMap.set(action.roomId, obj);

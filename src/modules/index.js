@@ -10,5 +10,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-
-export const base_uri = 'http://localhost:4000';

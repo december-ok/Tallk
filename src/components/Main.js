@@ -8,7 +8,7 @@ import ChatRoomList from './ChatRoomList/ChatRoomList';
 import { Websocket } from './Websocket/WebSocket';
 import { initRoom } from '../modules/room';
 import ChatRoom from './ChatRoom/ChatRoom';
-import { base_uri } from '../modules';
+import { base_uri } from '..';
 
 function Main() {
 	const store = useSelector((state) => state);

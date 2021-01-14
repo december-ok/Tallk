@@ -17,3 +17,5 @@ ReactDOM.render(
 	</React.StrictMode>,
 	document.getElementById('root')
 );
+
+export const base_uri = 'http://localhost:4000';
