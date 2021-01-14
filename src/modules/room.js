@@ -33,14 +33,14 @@ const initialState = new Map();
 export default function room(state = initialState, action) {
 	const newMap = new Map();
 	state.forEach((value, key) => {
-		newMap.set(key, value);
+		newMap.set(String(key), value);
 	});
 	let obj;
 	switch (action.type) {
 		case INIT_ROOM:
 			const { roomList } = action.data;
 			roomList.forEach((item) => {
-				newMap.set(item._id, {
+				newMap.set(String(item._id), {
 					...item,
 					chatObjList: [],
 					chatLoaded: false,
@@ -61,13 +61,13 @@ export default function room(state = initialState, action) {
 			obj.chatObjList.unshift(...action.data.chatObjList);
 			obj.chatLoaded = true;
 			obj.lastLoaded = obj.chatObjList[0]._id;
-			newMap.set(action.roomId, obj);
+			newMap.set(String(action.data.roomId), obj);
 			return newMap;
 		case ADD_REAL_CHAT:
 			obj = state.get(action.data.roomId);
 			obj.chatIdList.push(action.data.chat._id);
 			obj.chatObjList.push(action.data.chat);
-			newMap.set(action.roomId, obj);
+			newMap.set(String(action.data.roomId), obj);
 			return newMap;
 		default:
 			return state;

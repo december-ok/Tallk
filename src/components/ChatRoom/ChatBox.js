@@ -5,7 +5,6 @@ function ChatBox({ info, userId }) {
 		'https://cdn.vox-cdn.com/thumbor/0BrQddT3Tlqzjwl5kviUWdIjgJs=/0x0:4256x2706/1200x800/filters:focal(2070x1006:2750x1686)/cdn.vox-cdn.com/uploads/chorus_image/image/51305115/114916541.0.jpg';
 
 	const isMine = String(info.speaker._id) === String(userId);
-	console.log(info);
 	return (
 		<div className="ChatBox">
 			{!isMine && (

@@ -15,6 +15,7 @@ function ChatRoom() {
 	const inputBox = useRef();
 	const info = store.room.get(id);
 
+	console.log(store);
 	useEffect(() => {
 		const getChatRoom = async (from, amount) => {
 			const message = `${base_uri}/api/getRoomChat?roomId=${info._id}&from=${from}&amount=${amount}`;
