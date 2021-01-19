@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import AddChatPopup from './AddChatPopup';
 import ChatRoomBlock from './ChatRoomBlock';
 
 function ChatRoomList() {
@@ -10,6 +11,10 @@ function ChatRoomList() {
 			{Array.from(store.room.entries()).map((item) => (
 				<ChatRoomBlock info={item[1]} key={item[1]._id} />
 			))}
+			<button className="AddRoomButton">
+				<i className="fas fa-plus" />
+			</button>
+			<AddChatPopup />
 		</div>
 	);
 }
