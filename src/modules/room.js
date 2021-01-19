@@ -1,6 +1,7 @@
 const INIT_ROOM = 'room/INIT_ROOM';
 
 const ADD_ROOM = 'room/ADD_ROOM';
+const CHANGE_ROOM_PEOPLE = 'room/CHANGEROOMPEOPLE';
 const ADD_ID = 'room/ADD_ID';
 // 과거의 채팅 데이터를 불러올 경우
 const ADD_PREV_CHATOBJLIST = 'room/ADD_PREV_CHATOBJLIST';
@@ -11,9 +12,13 @@ export const initRoom = (data) => ({
 	type: INIT_ROOM,
 	data,
 });
-export const addRoom = (roomId) => ({
+export const addRoom = (roomObj) => ({
 	type: ADD_ROOM,
-	data: { roomId },
+	data: { roomObj },
+});
+export const changeRoomPeople = (roomId, userId, isOut) => ({
+	type: CHANGE_ROOM_PEOPLE,
+	data: { roomId, userId, isOut },
 });
 export const addId = (roomId, chat) => ({
 	type: ADD_ID,
@@ -49,13 +54,24 @@ export default function room(state = initialState, action) {
 			});
 			console.log('done!');
 			return newMap;
-		// case ADD_ROOM:
-		// 	newMap.set(action.data.roomId, {
-		// 		roomId: action.data.roomId,
-		// 		chatIdList: [],
-		// 		chatObjList: [],
-		// 	});
-		// 	return newMap;
+		case ADD_ROOM:
+			newMap.set(action.data.roomObj._id, {
+				...action.data.roomObj,
+				roomId: action.data.roomObj._id,
+				chatObjList: [],
+			});
+			return newMap;
+		case CHANGE_ROOM_PEOPLE:
+			obj = state.get(action.data.roomId);
+			if (action.data.isOut) {
+				obj.userList = obj.userList.filter(
+					(item) => item._id !== action.data.userId
+				);
+			} else {
+				obj.userList.push(action.data.userId);
+			}
+			newMap.set(String(action.data.roomId), obj);
+			return newMap;
 		case ADD_PREV_CHATOBJLIST:
 			obj = state.get(action.data.roomId);
 			obj.chatObjList.unshift(...action.data.chatObjList);

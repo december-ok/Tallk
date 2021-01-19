@@ -11,6 +11,8 @@ export const WebSocketRouter = (messageObject) => {
 		case 'getReadChat':
 			getReadChat(data);
 			break;
+		case 'doReload':
+			break;
 		default:
 			console.log('Error Wrong message:' + JSON.stringify(messageObject));
 			break;
