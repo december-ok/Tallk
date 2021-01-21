@@ -1,11 +1,15 @@
+import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { base_uri } from '../..';
+import room from '../../modules/room';
 
 function AddChatPopup() {
 	const userDiv = useRef();
 	const nextButton = useRef();
 	const store = useSelector((state) => state);
 	const [selectedUsers, setSelectedUsers] = useState([]);
+	const [roomName, setRoomName] = useState([]);
 	const [search, setSearch] = useState('');
 
 	const userBoxClick = (e) => {
@@ -17,6 +21,7 @@ function AddChatPopup() {
 
 		if (checkbox.checked) {
 			setSelectedUsers(selectedUsers.concat(userBox.attributes.data.value));
+			setRoomName(roomName.concat(e.currentTarget.childNodes[2].textContent));
 
 			//새로운 노드를 만들고 거기에 요소를 붙임
 			const userIcon = document.createElement('div');
@@ -33,8 +38,13 @@ function AddChatPopup() {
 			setSelectedUsers(
 				selectedUsers.filter((item) => item !== userBox.attributes.data.value)
 			);
+			setRoomName(
+				roomName.filter(
+					(item) => item !== e.currentTarget.childNodes[2].textContent
+				)
+			);
 
-			console.log(userBox.attributes.data.value);
+			// console.log(userBox.attributes.data.value); id값임
 			const userIcon = document.getElementById(userBox.attributes.data.value);
 			userDiv.current.removeChild(userIcon);
 		}
@@ -43,6 +53,16 @@ function AddChatPopup() {
 	const searchUpdate = (e) => {
 		console.log(e.currentTarget.value);
 		setSearch(e.currentTarget.value);
+	};
+
+	const makeNewChat = async () => {
+		const message = `${base_uri}/api/createRoom`;
+		const { data } = await axios.post(message, {
+			creator: store.user._id,
+			roomName: roomName.concat(store.user.userName).join(', '),
+			userList: selectedUsers.concat(store.user._id),
+		});
+		console.log(data);
 	};
 
 	useEffect(() => {
@@ -76,8 +96,8 @@ function AddChatPopup() {
 						<h4>{item.userName}</h4>
 					</div>
 				))}
-			<button className="CreateButton" ref={nextButton} disabled>
-				만들기
+			<button className="CreateButton" onClick={makeNewChat} ref={nextButton}>
+				New Chat
 			</button>
 		</div>
 	);

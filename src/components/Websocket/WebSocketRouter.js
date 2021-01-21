@@ -1,4 +1,8 @@
-import { getReadChat, getRealTimeChat } from './WebSocketController';
+import {
+	getNewRoom,
+	getReadChat,
+	getRealTimeChat,
+} from './WebSocketController';
 
 export const WebSocketRouter = (messageObject) => {
 	console.log(messageObject);
@@ -10,6 +14,9 @@ export const WebSocketRouter = (messageObject) => {
 			break;
 		case 'getReadChat':
 			getReadChat(data);
+			break;
+		case 'getNewRoom':
+			getNewRoom(data);
 			break;
 		case 'doReload':
 			break;

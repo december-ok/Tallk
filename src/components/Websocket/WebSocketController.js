@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { base_uri, store } from '../..';
 import room, { addRealChat, addRoom, initRoom } from '../../modules/room';
 
@@ -14,6 +13,7 @@ export const getReadChat = (data) => {
 export const getNewRoom = (data) => {
 	const { room } = data;
 	store.dispatch(addRoom(room));
+	console.log(store.getState());
 };
 
 export const changeRoomPeople = (data) => {
