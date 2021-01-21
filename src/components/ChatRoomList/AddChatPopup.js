@@ -11,30 +11,33 @@ function AddChatPopup() {
 	const userBoxClick = (e) => {
 		const userBox = e.currentTarget;
 		const checkbox = e.currentTarget.childNodes[0];
+		// 이것이 Id...
+		// console.log(userBox.attributes.data.value);
 		if (e.target !== checkbox) checkbox.checked = !checkbox.checked;
 
 		if (checkbox.checked) {
-			setSelectedUsers(selectedUsers.concat(userBox.data));
+			setSelectedUsers(selectedUsers.concat(userBox.attributes.data.value));
 
 			//새로운 노드를 만들고 거기에 요소를 붙임
 			const userIcon = document.createElement('div');
 			const userImg = e.currentTarget.childNodes[1].cloneNode(true);
 			const userName = e.currentTarget.childNodes[2].cloneNode(true);
-			console.log(userName);
 			userIcon.setAttribute('class', 'UserIcon');
-			userIcon.setAttribute('id', userBox.data);
+			userIcon.setAttribute('id', userBox.attributes.data.value);
 			userIcon.appendChild(userImg);
 			userIcon.appendChild(userName);
 
 			userDiv.current.appendChild(userIcon);
 		} else {
 			//제거
-			setSelectedUsers(selectedUsers.filter((item) => item !== userBox.data));
+			setSelectedUsers(
+				selectedUsers.filter((item) => item !== userBox.attributes.data.value)
+			);
 
-			const userIcon = document.querySelector(`#${userBox.data}`);
+			console.log(userBox.attributes.data.value);
+			const userIcon = document.getElementById(userBox.attributes.data.value);
 			userDiv.current.removeChild(userIcon);
 		}
-		console.log(selectedUsers);
 	};
 
 	const searchUpdate = (e) => {
