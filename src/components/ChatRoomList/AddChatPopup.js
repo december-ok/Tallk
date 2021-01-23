@@ -1,8 +1,6 @@
-import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { base_uri } from '../..';
-import room from '../../modules/room';
+import { postCreateChatRoom } from '../../apiController';
 
 function AddChatPopup() {
 	const userDiv = useRef();
@@ -55,14 +53,13 @@ function AddChatPopup() {
 		setSearch(e.currentTarget.value);
 	};
 
-	const makeNewChat = async () => {
-		const message = `${base_uri}/api/createRoom`;
-		const { data } = await axios.post(message, {
+	const makeNewChatRoom = async () => {
+		const data = await postCreateChatRoom({
 			creator: store.user._id,
 			roomName: roomName.concat(store.user.userName).join(', '),
 			userList: selectedUsers.concat(store.user._id),
 		});
-		console.log(data);
+		window.location.href = 'http://localhost:3000/#/chats/' + data._id;
 	};
 
 	useEffect(() => {
@@ -84,19 +81,26 @@ function AddChatPopup() {
 			<input className="UserSearchBox" onChange={searchUpdate} />
 			{store.user.friendsList
 				.filter((item) => item.userName.includes(search))
-				.map((item) => (
-					<div
-						className="SimpleUserBox"
-						key={item._id}
-						data={item._id}
-						onClick={userBoxClick}
-					>
-						<input type="checkbox" readOnly />
-						<img className="SimpleUserBoxImg" src={link} width="100" />
-						<h4>{item.userName}</h4>
-					</div>
-				))}
-			<button className="CreateButton" onClick={makeNewChat} ref={nextButton}>
+				.map((item) => {
+					const user = store.users.get(item._id);
+					return (
+						<div
+							className="SimpleUserBox"
+							key={user._id}
+							data={user._id}
+							onClick={userBoxClick}
+						>
+							<input type="checkbox" readOnly />
+							<img className="SimpleUserBoxImg" src={link} width="100" />
+							<h4>{user.userName}</h4>
+						</div>
+					);
+				})}
+			<button
+				className="CreateButton"
+				onClick={makeNewChatRoom}
+				ref={nextButton}
+			>
 				New Chat
 			</button>
 		</div>

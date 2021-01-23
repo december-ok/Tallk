@@ -1,6 +1,7 @@
 const INIT_ROOM = 'room/INIT_ROOM';
 
 const ADD_ROOM = 'room/ADD_ROOM';
+const REMOVE_ROOM = 'room/REMOVE_ROOM';
 const CHANGE_ROOM_PEOPLE = 'room/CHANGEROOMPEOPLE';
 const ADD_ID = 'room/ADD_ID';
 // 과거의 채팅 데이터를 불러올 경우
@@ -15,6 +16,10 @@ export const initRoom = (data) => ({
 export const addRoom = (roomObj) => ({
 	type: ADD_ROOM,
 	data: { roomObj },
+});
+export const removeRoom = (roomId) => ({
+	type: REMOVE_ROOM,
+	data: { roomId },
 });
 export const changeRoomPeople = (roomId, userId, isOut) => ({
 	type: CHANGE_ROOM_PEOPLE,
@@ -60,6 +65,9 @@ export default function room(state = initialState, action) {
 				roomId: action.data.roomObj._id,
 				chatObjList: [],
 			});
+			return newMap;
+		case REMOVE_ROOM:
+			newMap.delete(action.data.roomId);
 			return newMap;
 		case CHANGE_ROOM_PEOPLE:
 			obj = state.get(action.data.roomId);

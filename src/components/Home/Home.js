@@ -12,9 +12,11 @@ function Home() {
 				{JSON.stringify(store)}
 				<ProfileBlock user={store.user} />
 				<h5 className="friendIndex">친구 {store.user.friendsList.length}</h5>
-				{store.user.friendsList.map((item) => (
-					<ProfileBlock user={item} key={item._id} />
-				))}
+				{store.user.friendsList.map((item) => {
+					//get Friend info from store
+					const user = store.users.get(item._id);
+					return <ProfileBlock user={user} key={user._id} />;
+				})}
 			</div>
 		</div>
 	);
