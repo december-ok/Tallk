@@ -14,7 +14,6 @@ export default function user(state = initialState, action) {
 			return {
 				...state,
 				...action.user,
-				loaded: true,
 			};
 		case UPDATE:
 			return {

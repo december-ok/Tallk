@@ -64,6 +64,7 @@ export default function room(state = initialState, action) {
 				...action.data.roomObj,
 				roomId: action.data.roomObj._id,
 				chatObjList: [],
+				chatLoaded: false,
 			});
 			return newMap;
 		case REMOVE_ROOM:

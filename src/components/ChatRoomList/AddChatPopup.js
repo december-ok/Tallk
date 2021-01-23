@@ -49,7 +49,7 @@ function AddChatPopup() {
 	};
 
 	const searchUpdate = (e) => {
-		console.log(e.currentTarget.value);
+		// console.log(e.currentTarget.value);
 		setSearch(e.currentTarget.value);
 	};
 
@@ -80,9 +80,13 @@ function AddChatPopup() {
 			<div className="SelectedUserList" ref={userDiv} />
 			<input className="UserSearchBox" onChange={searchUpdate} />
 			{store.user.friendsList
-				.filter((item) => item.userName.includes(search))
+				.filter((item) => {
+					const user = store.users.get(item);
+					return user.userName.includes(search);
+				})
 				.map((item) => {
-					const user = store.users.get(item._id);
+					const user = store.users.get(item);
+					// console.log(user);
 					return (
 						<div
 							className="SimpleUserBox"

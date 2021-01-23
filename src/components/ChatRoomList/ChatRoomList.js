@@ -4,7 +4,7 @@ import ChatRoomBlock from './ChatRoomBlock';
 
 function ChatRoomList() {
 	const store = useSelector((state) => state);
-	console.log(store);
+	// console.log(store);
 	return (
 		<div className="ChatRoomList">
 			<h1>Chats</h1>

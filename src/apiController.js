@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { base_uri } from '.';
 
-export const getInitialData = async (userId) => {
+export const getUser = async (userId) => {
 	const message = `${base_uri}/api/getUser?id=`;
 	const { data } = await axios.get(message + userId);
 	return data;

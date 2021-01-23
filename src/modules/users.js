@@ -26,6 +26,7 @@ export default function users(state = initialState, action) {
 		case UPDATE_USER:
 			const { userId, userObj } = action.data;
 			newMap.set(String(userId), userObj);
+			// console.log(newMap);
 			return newMap;
 		default:
 			return state;

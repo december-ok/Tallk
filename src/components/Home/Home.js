@@ -14,7 +14,7 @@ function Home() {
 				<h5 className="friendIndex">친구 {store.user.friendsList.length}</h5>
 				{store.user.friendsList.map((item) => {
 					//get Friend info from store
-					const user = store.users.get(item._id);
+					const user = store.users.get(item);
 					return <ProfileBlock user={user} key={user._id} />;
 				})}
 			</div>

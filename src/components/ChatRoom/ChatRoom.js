@@ -23,16 +23,21 @@ function ChatRoom() {
 		const getChat = async (from, amount) => {
 			const data = await getChatRoom({ roomId: id, from, amount });
 			dispatch(addPrevChatObjList(id, data));
+			info.chatLoaded = true;
 			setChatLoaded(true);
-
-			console.log(data);
 		};
-		if (info.chatIdList.length) {
-			console.log('getdata');
+		if (info.chatIdList.length && !info.chatLoaded) {
+			// console.log('getdata');
 			getChat(info.chatIdList[info.chatIdList.length - 1], 50);
+		} else if (info.chatIdList.length === 0) {
 		} else {
 			setChatLoaded(true);
 		}
+		info.chatLoaded = true;
+
+		return () => {
+			console.log('hi');
+		};
 	}, []);
 
 	const sendChat = () => {
@@ -101,7 +106,6 @@ function ChatRoom() {
 							.userList.filter((item) => item !== store.user._id)
 							.map((item) => {
 								const user = store.users.get(item);
-								console.log(item, user);
 								return (
 									<div className="SimpleUserBox" key={item}>
 										<img className="SimpleUserBoxImg" src={link} width="100" />
