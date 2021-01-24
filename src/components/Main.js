@@ -44,11 +44,14 @@ function Main() {
 			Websocket.open(data._id);
 			setLoaded(true);
 		};
-
-		getUserData();
-		return () => {
-			Websocket.close();
-		};
+		if (userId) {
+			getUserData();
+			return () => {
+				Websocket.close();
+			};
+		} else {
+			window.location.href = '';
+		}
 	}, []);
 
 	if (store.user.block) {

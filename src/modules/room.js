@@ -92,6 +92,8 @@ export default function room(state = initialState, action) {
 			obj = state.get(action.data.roomId);
 			obj.chatIdList.push(action.data.chat._id);
 			obj.chatObjList.push(action.data.chat);
+			obj.recentChatTime = action.data.chat.createdAt;
+			obj.recentChat = action.data.chat.message;
 			newMap.set(String(action.data.roomId), obj);
 			return newMap;
 		default:

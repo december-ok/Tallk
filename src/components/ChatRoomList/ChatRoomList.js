@@ -14,9 +14,16 @@ function ChatRoomList() {
 				</button>
 			</div>
 			{/* sort function 추가하기!!!!!!! */}
-			{Array.from(store.room.entries()).map((item) => (
-				<ChatRoomBlock info={item[1]} key={item[1]._id} />
-			))}
+			{Array.from(store.room.entries())
+				.sort((a, b) => {
+					console.log(
+						new Date(a[1].recentChatTime) - new Date(b[1].recentChatTime)
+					);
+					return new Date(b[1].recentChatTime) - new Date(a[1].recentChatTime);
+				})
+				.map((item) => (
+					<ChatRoomBlock info={item[1]} key={item[1]._id} />
+				))}
 			<AddChatPopup />
 		</div>
 	);

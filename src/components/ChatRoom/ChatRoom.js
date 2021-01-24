@@ -25,13 +25,15 @@ function ChatRoom() {
 			dispatch(addPrevChatObjList(id, data));
 			info.chatLoaded = true;
 			setChatLoaded(true);
+			info.chatLoaded = true;
 		};
 		if (info.chatIdList.length && !info.chatLoaded) {
 			// console.log('getdata');
 			getChat(info.chatIdList[info.chatIdList.length - 1], 50);
+		} else {
+			setChatLoaded(true);
+			info.chatLoaded = true;
 		}
-		setChatLoaded(true);
-		info.chatLoaded = true;
 
 		return () => {
 			console.log('hi');
