@@ -1,5 +1,6 @@
 import { base_uri, store } from '../..';
 import room, { addRealChat, addRoom, initRoom } from '../../modules/room';
+import { block } from '../../modules/user';
 
 export const getRealTimeChat = (data) => {
 	const { roomId, chat } = data;
@@ -23,4 +24,9 @@ export const changeRoomPeople = (data) => {
 
 export const doReload = async () => {
 	window.location.reload();
+};
+
+export const blockConnect = () => {
+	store.dispatch(block());
+	console.log(store.getState());
 };

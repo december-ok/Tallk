@@ -1,4 +1,5 @@
 import {
+	blockConnect,
 	getNewRoom,
 	getReadChat,
 	getRealTimeChat,
@@ -19,6 +20,9 @@ export const WebSocketRouter = (messageObject) => {
 			getNewRoom(data);
 			break;
 		case 'doReload':
+			break;
+		case 'block':
+			blockConnect();
 			break;
 		default:
 			console.log('Error Wrong message:' + JSON.stringify(messageObject));

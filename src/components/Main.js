@@ -51,6 +51,13 @@ function Main() {
 		};
 	}, []);
 
+	if (store.user.block) {
+		return (
+			<div className="Main">
+				<em>Only one client is Allowed!</em>
+			</div>
+		);
+	}
 	if (!Loaded) {
 		return (
 			<div className="Main">
