@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ChatRoomList from './ChatRoomList/ChatRoomList';
 import { Websocket } from './Websocket/WebSocket';
-import { addRoom, initRoom } from '../modules/room';
+import { addRoom } from '../modules/room';
 import ChatRoom from './ChatRoom/ChatRoom';
 import { updateUser } from '../modules/users';
 import { getRoom, getUser } from '../apiController';
 import Navigation from './Navigation';
 import { setUser } from '../modules/user';
+import Setting from './Setting';
+import Profile from './Home/Profile';
 
 function Main() {
 	const store = useSelector((state) => state);
@@ -62,8 +64,9 @@ function Main() {
 			<Router>
 				<div className="contents">
 					<Switch>
-						<Route path="/profile/:id" />
+						<Route path="/profile/:id" component={Profile} />
 						<Route path="/chats/:id" component={ChatRoom} />
+						<Route path="/setting" component={Setting} />
 						<Route path="/chats" component={ChatRoomList} />
 						<Route path="/:id">No such Page</Route>
 						<Route path="/" component={Home} />

@@ -9,6 +9,9 @@ function Navigation() {
 			<Link className="link" to="/chats">
 				<i className="fas fa-comments" />
 			</Link>
+			<Link className="link" to="/setting">
+				<i className="fas fa-cogs" />
+			</Link>
 		</div>
 	);
 }

@@ -7,14 +7,16 @@ function ChatRoomList() {
 	// console.log(store);
 	return (
 		<div className="ChatRoomList">
-			<h1>Chats</h1>
+			<div className="ChatRoomListHeader">
+				<h1>Chats</h1>
+				<button className="AddRoomButton">
+					<i className="fas fa-comment-medical" />
+				</button>
+			</div>
 			{/* sort function 추가하기!!!!!!! */}
 			{Array.from(store.room.entries()).map((item) => (
 				<ChatRoomBlock info={item[1]} key={item[1]._id} />
 			))}
-			<button className="AddRoomButton">
-				<i className="fas fa-plus" />
-			</button>
 			<AddChatPopup />
 		</div>
 	);

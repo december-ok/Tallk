@@ -7,7 +7,12 @@ function Home() {
 
 	return (
 		<div className="Home">
-			<h1>Home</h1>
+			<div className="HomeHeader">
+				<h1>Home</h1>
+				<button className="AddRoomButton">
+					<i className="fas fa-user-plus" />
+				</button>
+			</div>
 			<div className="Content">
 				{JSON.stringify(store)}
 				<ProfileBlock user={store.user} />

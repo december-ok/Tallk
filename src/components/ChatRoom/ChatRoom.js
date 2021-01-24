@@ -29,10 +29,8 @@ function ChatRoom() {
 		if (info.chatIdList.length && !info.chatLoaded) {
 			// console.log('getdata');
 			getChat(info.chatIdList[info.chatIdList.length - 1], 50);
-		} else if (info.chatIdList.length === 0) {
-		} else {
-			setChatLoaded(true);
 		}
+		setChatLoaded(true);
 		info.chatLoaded = true;
 
 		return () => {
@@ -70,11 +68,17 @@ function ChatRoom() {
 				<div className="ChatRoom">
 					<div className="ChatRoomMain">
 						<div className="ChatRoomHeader">
-							<Link to="/chats">
+							<button
+								onClick={() => {
+									window.history.back();
+								}}
+							>
 								<i className="fas fa-chevron-left" />
-							</Link>
+							</button>
 							<span className="ChatRoomName">{info.roomName}</span>
-							<i className="fas fa-bars" />
+							<button>
+								<i className="fas fa-bars" />
+							</button>
 						</div>
 
 						<div className="ChatDialogs">
@@ -84,7 +88,9 @@ function ChatRoom() {
 						</div>
 
 						<div className="ChatBottom">
-							<i className="far fa-plus-square" />
+							<button>
+								<i className="far fa-plus-square" />
+							</button>
 							<input className="ChatInput" ref={inputBox}></input>
 							<button className="ChatButton" onClick={sendChat}>
 								<i className="fas fa-arrow-right" />
