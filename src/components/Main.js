@@ -12,6 +12,7 @@ import Navigation from './Navigation';
 import { setUser } from '../modules/user';
 import Setting from './Setting';
 import Profile from './Home/Profile';
+import AddFriend from './Home/AddFriend';
 
 function Main() {
 	const store = useSelector((state) => state);
@@ -67,6 +68,7 @@ function Main() {
 						<Route path="/profile/:id" component={Profile} />
 						<Route path="/chats/:id" component={ChatRoom} />
 						<Route path="/setting" component={Setting} />
+						<Route path="/addFriend" component={AddFriend} />
 						<Route path="/chats" component={ChatRoomList} />
 						<Route path="/:id">No such Page</Route>
 						<Route path="/" component={Home} />

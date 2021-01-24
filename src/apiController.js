@@ -28,3 +28,9 @@ export const getRoom = async ({ roomId }) => {
 	const { data } = await axios.get(message);
 	return data;
 };
+
+export const getUserEmail = async (email) => {
+	const message = `${base_uri}/api/getUserEmail?email=`;
+	const { data } = await axios.get(message + email);
+	return data;
+};
