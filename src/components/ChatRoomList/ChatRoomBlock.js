@@ -8,9 +8,11 @@ function ChatRoomBlock({ info }) {
 		<Link to={`/chats/${info._id}`}>
 			<div className="ChatRoomBlock">
 				<img src={link} alt="profile_img" width="100" />
-				<h3>{info.roomName}</h3>
-				<i className="fas fa-user" />
-				<span>{info.userList.length}</span>
+				<div className="RoomTitle">
+					<h3>{info.roomName.substring(0, 12)}</h3>
+					<i className="fas fa-user" />
+					<span>{info.userList.length}</span>
+				</div>
 				<h5>{info.recentChat}</h5>
 			</div>
 		</Link>

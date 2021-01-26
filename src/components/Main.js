@@ -13,6 +13,7 @@ import { setUser } from '../modules/user';
 import Setting from './Setting';
 import Profile from './Home/Profile';
 import AddFriend from './Home/AddFriend';
+import AddChatPopup from './ChatRoomList/AddChatPopup';
 
 function Main() {
 	const store = useSelector((state) => state);
@@ -56,14 +57,14 @@ function Main() {
 
 	if (store.user.block) {
 		return (
-			<div className="Main">
+			<div className="Loading">
 				<em>Only one client is Allowed!</em>
 			</div>
 		);
 	}
 	if (!Loaded) {
 		return (
-			<div className="Main">
+			<div className="Loading">
 				<h1>Loading...</h1>
 				<h5>If loading is too long, something went to Wrong!</h5>
 			</div>
@@ -79,6 +80,7 @@ function Main() {
 						<Route path="/profile/:id" component={Profile} />
 						<Route path="/chats/:id" component={ChatRoom} />
 						<Route path="/setting" component={Setting} />
+						<Route path="/addChat" component={AddChatPopup} />
 						<Route path="/addFriend" component={AddFriend} />
 						<Route path="/chats" component={ChatRoomList} />
 						<Route path="/:id">No such Page</Route>

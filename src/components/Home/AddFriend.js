@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getUserEmail } from '../../apiController';
 
 function AddFriend() {
@@ -15,13 +16,11 @@ function AddFriend() {
 	return (
 		<div className="AddFriend">
 			<div className="AddFriendHeader">
-				<button
-					onClick={() => {
-						window.history.back();
-					}}
-				>
-					<i className="fas fa-chevron-left" />
-				</button>
+				<Link to="/">
+					<button>
+						<i className="fas fa-chevron-left" />
+					</button>
+				</Link>
 				<h3>Add Friend by E-mail</h3>
 			</div>
 			<div className="AddFriendSearch">

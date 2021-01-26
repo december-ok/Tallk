@@ -1,0 +1,19 @@
+.Navigation {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	flex: auto auto auto;
+
+	background-color: white;
+}
+
+.Navigation a {
+	margin: auto auto;
+}
+
+.Navigation a i {
+	font-size: 30px;
+}

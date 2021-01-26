@@ -35,9 +35,7 @@ function ChatRoom() {
 			info.chatLoaded = true;
 		}
 
-		return () => {
-			console.log('hi');
-		};
+		return () => {};
 	}, []);
 
 	const sendChat = () => {
@@ -103,11 +101,13 @@ function ChatRoom() {
 						<h3>Chat Option</h3>
 						<h4>Users</h4>
 						{
-							<div className="SimpleUserBox">
-								<img className="SimpleUserBoxImg" src={link} width="100" />
-								<i className="fas fa-user" />
-								<h4>{store.user.userName}</h4>
-							</div>
+							<Link to={`/profile/${store.user._id}`}>
+								<div className="SimpleUserBox">
+									<img className="SimpleUserBoxImg" src={link} width="100" />
+									<i className="fas fa-user" />
+									<h4>{store.user.userName}</h4>
+								</div>
+							</Link>
 						}
 						{store.room
 							.get(String(id))
@@ -115,10 +115,16 @@ function ChatRoom() {
 							.map((item) => {
 								const user = store.users.get(item);
 								return (
-									<div className="SimpleUserBox" key={item}>
-										<img className="SimpleUserBoxImg" src={link} width="100" />
-										<h4>{user.userName}</h4>
-									</div>
+									<Link to={`/profile/${user._id}`} key={user._id}>
+										<div className="SimpleUserBox">
+											<img
+												className="SimpleUserBoxImg"
+												src={link}
+												width="100"
+											/>
+											<h4>{user.userName}</h4>
+										</div>
+									</Link>
 								);
 							})}
 						<button className="InviteButton">Invite (notImplemented)</button>

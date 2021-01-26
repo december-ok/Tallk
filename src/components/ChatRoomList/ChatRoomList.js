@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import AddChatPopup from './AddChatPopup';
 import ChatRoomBlock from './ChatRoomBlock';
 
@@ -9,9 +10,11 @@ function ChatRoomList() {
 		<div className="ChatRoomList">
 			<div className="ChatRoomListHeader">
 				<h1>Chats</h1>
-				<button className="AddRoomButton">
-					<i className="fas fa-comment-medical" />
-				</button>
+				<Link to="/addChat">
+					<button className="AddRoomButton">
+						<i className="fas fa-comment-medical" />
+					</button>
+				</Link>
 			</div>
 			{/* sort function 추가하기!!!!!!! */}
 			{Array.from(store.room.entries())
@@ -24,7 +27,6 @@ function ChatRoomList() {
 				.map((item) => (
 					<ChatRoomBlock info={item[1]} key={item[1]._id} />
 				))}
-			<AddChatPopup />
 		</div>
 	);
 }

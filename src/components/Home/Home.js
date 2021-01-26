@@ -1,20 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ProfileBlock from './ProfileBlock';
 
 function Home() {
 	const store = useSelector((state) => state);
 	// console.log(store);
 
+	const onClick = (e) => {};
+
 	return (
 		<div className="Home">
 			<div className="HomeHeader">
 				<h1>Home</h1>
-				<button className="AddRoomButton">
-					<i className="fas fa-user-plus" />
-				</button>
+				<Link to={'/addFriend'}>
+					<button className="AddRoomButton" onClick={onClick}>
+						<i className="fas fa-user-plus" />
+					</button>
+				</Link>
 			</div>
 			<div className="Content">
-				{JSON.stringify(store)}
+				{/* {JSON.stringify(store)} */}
 				<ProfileBlock user={store.user} />
 				<h5 className="friendIndex">친구 {store.user.friendsList.length}</h5>
 				{store.user.friendsList.map((item) => {

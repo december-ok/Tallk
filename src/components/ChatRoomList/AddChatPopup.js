@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { postCreateChatRoom } from '../../apiController';
 
 function AddChatPopup() {
@@ -61,19 +62,30 @@ function AddChatPopup() {
 
 	return (
 		<div className="AddChatPopup">
-			<h3>채팅할 사람 추가하기</h3>
+			<div className="AddChatHeader">
+				<Link to="/">
+					<button>
+						<i className="fas fa-chevron-left" />
+					</button>
+				</Link>
+				<h3>채팅할 사람 추가하기</h3>
+			</div>
 			<div className="SelectedUserList" ref={userDiv}>
 				{selectedUsers.map((item) => {
 					const user = store.users.get(item);
 					return (
-						<>
+						<div className="SelectedUser" key={user._id}>
 							<img src={user.avatarUrl} alt={user.userName} />
-							<h4>{user.userName}</h4>
-						</>
+							<h5>{user.userName}</h5>
+						</div>
 					);
 				})}
 			</div>
-			<input className="UserSearchBox" onChange={searchUpdate} />
+			<input
+				className="UserSearchBox"
+				onChange={searchUpdate}
+				placeholder="Type Something..."
+			/>
 			{store.user.friendsList
 				.filter((item) => {
 					const user = store.users.get(item);
@@ -89,7 +101,11 @@ function AddChatPopup() {
 							data={user._id}
 							onClick={userBoxClick}
 						>
-							<input type="checkbox" readOnly />
+							<input
+								type="checkbox"
+								readOnly
+								checked={selectedUsers.includes(user._id)}
+							/>
 							<img className="SimpleUserBoxImg" src={link} width="100" />
 							<h4>{user.userName}</h4>
 						</div>
