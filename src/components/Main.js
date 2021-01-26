@@ -19,7 +19,7 @@ function Main() {
 	const dispatch = useDispatch();
 	const [Loaded, setLoaded] = useState(false);
 
-	const userId = '5ff854bdd17cbf4f8ce728be';
+	const userId = '600f65ca968bf33884b4b0db';
 	useEffect(() => {
 		const getUserData = async () => {
 			const data = await getUser(userId);
@@ -65,6 +65,7 @@ function Main() {
 		return (
 			<div className="Main">
 				<h1>Loading...</h1>
+				<h5>If loading is too long, something went to Wrong!</h5>
 			</div>
 		);
 	}

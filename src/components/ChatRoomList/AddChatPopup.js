@@ -20,17 +20,6 @@ function AddChatPopup() {
 		if (checkbox.checked) {
 			setSelectedUsers(selectedUsers.concat(userBox.attributes.data.value));
 			setRoomName(roomName.concat(e.currentTarget.childNodes[2].textContent));
-
-			//새로운 노드를 만들고 거기에 요소를 붙임
-			const userIcon = document.createElement('div');
-			const userImg = e.currentTarget.childNodes[1].cloneNode(true);
-			const userName = e.currentTarget.childNodes[2].cloneNode(true);
-			userIcon.setAttribute('class', 'UserIcon');
-			userIcon.setAttribute('id', userBox.attributes.data.value);
-			userIcon.appendChild(userImg);
-			userIcon.appendChild(userName);
-
-			userDiv.current.appendChild(userIcon);
 		} else {
 			//제거
 			setSelectedUsers(
@@ -41,10 +30,6 @@ function AddChatPopup() {
 					(item) => item !== e.currentTarget.childNodes[2].textContent
 				)
 			);
-
-			// console.log(userBox.attributes.data.value); id값임
-			const userIcon = document.getElementById(userBox.attributes.data.value);
-			userDiv.current.removeChild(userIcon);
 		}
 	};
 
@@ -77,7 +62,17 @@ function AddChatPopup() {
 	return (
 		<div className="AddChatPopup">
 			<h3>채팅할 사람 추가하기</h3>
-			<div className="SelectedUserList" ref={userDiv} />
+			<div className="SelectedUserList" ref={userDiv}>
+				{selectedUsers.map((item) => {
+					const user = store.users.get(item);
+					return (
+						<>
+							<img src={user.avatarUrl} alt={user.userName} />
+							<h4>{user.userName}</h4>
+						</>
+					);
+				})}
+			</div>
 			<input className="UserSearchBox" onChange={searchUpdate} />
 			{store.user.friendsList
 				.filter((item) => {
