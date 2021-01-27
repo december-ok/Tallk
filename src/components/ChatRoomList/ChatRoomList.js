@@ -8,7 +8,7 @@ function ChatRoomList() {
 	// console.log(store);
 	return (
 		<div className="ChatRoomList">
-			<div className="ChatRoomListHeader">
+			<div className="ChatRoomListHeader Header">
 				<h1>Chats</h1>
 				<Link to="/addChat">
 					<button className="AddRoomButton">

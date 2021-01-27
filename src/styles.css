@@ -117,12 +117,75 @@
     .AddChatPopup .SelectedUserList .SelectedUser h5 {
       margin: 3px auto; }
 
-.Main {
-  min-width: 320px;
-  margin: 0px auto;
-  margin-bottom: 50px; }
+.Login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
-button {
+.InputArea {
+  position: relative;
+  width: 280px;
+  margin-bottom: 10px; }
+  .InputArea input {
+    width: 270px;
+    padding: 20px 5px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+    outline: none; }
+  .InputArea label {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    transition: all 0.1s; }
+  .InputArea input:focus + label,
+  .InputArea input:valid + label {
+    top: 0;
+    font-size: 13px;
+    color: #166cea; }
+
+.ButtonArea {
+  margin-top: 20px; }
+  .ButtonArea button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #c0daff;
+    border-radius: 25px; }
+
+.ErrorArea {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .ErrorArea label {
+    text-align: center;
+    color: red; }
+  .ErrorArea label.vibe {
+    animation: vibrate-1 0.2s linear both; }
+
+@keyframes vibrate-1 {
+  0% {
+    transform: translate(0); }
+  20% {
+    transform: translate(-4px, 4px); }
+  40% {
+    transform: translate(-4px, -4px); }
+  60% {
+    transform: translate(4px, 4px); }
+  80% {
+    transform: translate(4px, -4px); }
+  100% {
+    transform: translate(0); } }
+
+.contents {
+  min-width: 320px;
+  margin: 0px auto; }
+
+.Main button {
   background-color: transparent;
   border: transparent; }
 

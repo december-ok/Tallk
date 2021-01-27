@@ -66,7 +66,7 @@ function Main() {
 		return (
 			<div className="Loading">
 				<h1>Loading...</h1>
-				<h5>If loading is too long, something went to Wrong!</h5>
+				<h5>If loading is too long, something went Wrong!</h5>
 			</div>
 		);
 	}

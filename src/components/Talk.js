@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, HashRouter as Router, Switch } from 'react-router-dom';
 import { setUser } from '../modules/user';
+import Login from './Auth/Login';
 import Home from './Home/Home';
 import Main from './Main';
 
@@ -11,12 +12,11 @@ function Talk() {
 	return (
 		<div className="Talk">
 			<Router>
-				<div className="contents">
-					<Switch>
-						<Route path="/" component={Main} />
-						<Route path="/auth" />
-					</Switch>
-				</div>
+				<Switch>
+					<Route path="/login" component={Login} />
+					{/* <Route path="/join" component={} /> */}
+					<Route path="/" component={Main} />
+				</Switch>
 			</Router>
 		</div>
 	);

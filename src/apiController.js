@@ -34,3 +34,9 @@ export const getUserEmail = async (email) => {
 	const { data } = await axios.get(message + email);
 	return data;
 };
+
+export const postLogin = async ({ email, password }) => {
+	const message = `${base_uri}/api/login`;
+	const data = await axios.post(message, { email, password });
+	return data;
+};

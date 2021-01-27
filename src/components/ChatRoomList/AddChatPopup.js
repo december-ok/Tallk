@@ -61,63 +61,65 @@ function AddChatPopup() {
 		'https://upload.wikimedia.org/wikipedia/commons/c/c1/Lionel_Messi_20180626.jpg';
 
 	return (
-		<div className="AddChatPopup">
-			<div className="AddChatHeader">
-				<Link to="/">
-					<button>
-						<i className="fas fa-chevron-left" />
-					</button>
-				</Link>
-				<h3>채팅할 사람 추가하기</h3>
+		<div className="BackgroundScreen">
+			<div className="AddChatPopup">
+				<div className="AddChatHeader">
+					<Link to="/chats">
+						<button>
+							<i className="fas fa-chevron-left" />
+						</button>
+					</Link>
+					<h3>채팅할 사람 추가하기</h3>
+				</div>
+				<div className="SelectedUserList" ref={userDiv}>
+					{selectedUsers.map((item) => {
+						const user = store.users.get(item);
+						return (
+							<div className="SelectedUser" key={user._id}>
+								<img src={user.avatarUrl} alt={user.userName} />
+								<h5>{user.userName}</h5>
+							</div>
+						);
+					})}
+				</div>
+				<input
+					className="UserSearchBox"
+					onChange={searchUpdate}
+					placeholder="Type Something..."
+				/>
+				{store.user.friendsList
+					.filter((item) => {
+						const user = store.users.get(item);
+						return user.userName.includes(search);
+					})
+					.map((item) => {
+						const user = store.users.get(item);
+						// console.log(user);
+						return (
+							<div
+								className="SimpleUserBox"
+								key={user._id}
+								data={user._id}
+								onClick={userBoxClick}
+							>
+								<input
+									type="checkbox"
+									readOnly
+									checked={selectedUsers.includes(user._id)}
+								/>
+								<img className="SimpleUserBoxImg" src={link} width="100" />
+								<h4>{user.userName}</h4>
+							</div>
+						);
+					})}
+				<button
+					className="CreateButton"
+					onClick={makeNewChatRoom}
+					ref={nextButton}
+				>
+					New Chat
+				</button>
 			</div>
-			<div className="SelectedUserList" ref={userDiv}>
-				{selectedUsers.map((item) => {
-					const user = store.users.get(item);
-					return (
-						<div className="SelectedUser" key={user._id}>
-							<img src={user.avatarUrl} alt={user.userName} />
-							<h5>{user.userName}</h5>
-						</div>
-					);
-				})}
-			</div>
-			<input
-				className="UserSearchBox"
-				onChange={searchUpdate}
-				placeholder="Type Something..."
-			/>
-			{store.user.friendsList
-				.filter((item) => {
-					const user = store.users.get(item);
-					return user.userName.includes(search);
-				})
-				.map((item) => {
-					const user = store.users.get(item);
-					// console.log(user);
-					return (
-						<div
-							className="SimpleUserBox"
-							key={user._id}
-							data={user._id}
-							onClick={userBoxClick}
-						>
-							<input
-								type="checkbox"
-								readOnly
-								checked={selectedUsers.includes(user._id)}
-							/>
-							<img className="SimpleUserBoxImg" src={link} width="100" />
-							<h4>{user.userName}</h4>
-						</div>
-					);
-				})}
-			<button
-				className="CreateButton"
-				onClick={makeNewChatRoom}
-				ref={nextButton}
-			>
-				New Chat
-			</button>
 		</div>
 	);
 }

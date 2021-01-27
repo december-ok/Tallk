@@ -35,7 +35,10 @@ function ChatRoom() {
 			info.chatLoaded = true;
 		}
 
-		return () => {};
+		document.querySelector('.Navigation').style.display = 'none';
+		return () => {
+			document.querySelector('.Navigation').style.display = '';
+		};
 	}, []);
 
 	const sendChat = () => {

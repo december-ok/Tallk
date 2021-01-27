@@ -10,7 +10,7 @@ function Home() {
 
 	return (
 		<div className="Home">
-			<div className="HomeHeader">
+			<div className="HomeHeader Header">
 				<h1>Home</h1>
 				<Link to={'/addFriend'}>
 					<button className="AddRoomButton" onClick={onClick}>
