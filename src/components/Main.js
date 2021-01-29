@@ -15,14 +15,15 @@ import Profile from './Home/Profile';
 import AddFriend from './Home/AddFriend';
 import AddChatPopup from './ChatRoomList/AddChatPopup';
 
-function Main() {
+function Main({ history }) {
 	const store = useSelector((state) => state);
 	const dispatch = useDispatch();
 	const [Loaded, setLoaded] = useState(false);
 
-	const userId = '600f65ca968bf33884b4b0db';
+	// const userId = '600f65ca968bf33884b4b0db';
+	const userId = store.user._id;
 	useEffect(() => {
-		const getUserData = async () => {
+		const getUserData = async (userId) => {
 			const data = await getUser(userId);
 			dispatch(setUser(data));
 
@@ -45,13 +46,14 @@ function Main() {
 			Websocket.open(data._id);
 			setLoaded(true);
 		};
+
 		if (userId) {
-			getUserData();
+			getUserData(userId);
 			return () => {
 				Websocket.close();
 			};
 		} else {
-			window.location.href = '';
+			window.location.href = '/#/login';
 		}
 	}, []);
 

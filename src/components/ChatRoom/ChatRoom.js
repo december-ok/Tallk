@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { base_uri } from '../..';
 import { getChatRoom } from '../../apiController';
+import { getUserAsync } from '../../dataController';
 import { addPrevChatObjList, removeRoom } from '../../modules/room';
 import { Websocket } from '../Websocket/WebSocket';
 import ChatBox from './ChatBox';
@@ -27,6 +28,15 @@ function ChatRoom() {
 			setChatLoaded(true);
 			info.chatLoaded = true;
 		};
+		const getChatRoomUserInfo = async () => {
+			const userPro = info.userList.map((userId) => {
+				return (async () => {
+					await getUserAsync(userId);
+				})();
+			});
+			await Promise.all(userPro);
+		};
+		getChatRoomUserInfo();
 		if (info.chatIdList.length && !info.chatLoaded) {
 			// console.log('getdata');
 			getChat(info.chatIdList[info.chatIdList.length - 1], 50);
@@ -35,9 +45,11 @@ function ChatRoom() {
 			info.chatLoaded = true;
 		}
 
-		document.querySelector('.Navigation').style.display = 'none';
+		if (document.querySelector('.Navigation'))
+			document.querySelector('.Navigation').style.display = 'none';
 		return () => {
-			document.querySelector('.Navigation').style.display = '';
+			if (document.querySelector('.Navigation'))
+				document.querySelector('.Navigation').style.display = '';
 		};
 	}, []);
 

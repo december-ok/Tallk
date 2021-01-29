@@ -1,5 +1,6 @@
 const INIT_USERS = 'users/INIT_USERS';
 const UPDATE_USER = 'users/UPDATE_USER';
+const USERS_RESET = 'users/RESET';
 
 export const initUsers = (data) => ({
 	type: INIT_USERS,
@@ -9,6 +10,7 @@ export const updateUser = (userId, userObj) => ({
 	type: UPDATE_USER,
 	data: { userId, userObj },
 });
+export const usersReset = () => ({ type: USERS_RESET });
 
 const initialState = new Map();
 
@@ -28,6 +30,8 @@ export default function users(state = initialState, action) {
 			newMap.set(String(userId), userObj);
 			// console.log(newMap);
 			return newMap;
+		case USERS_RESET:
+			return new Map();
 		default:
 			return state;
 	}

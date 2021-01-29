@@ -9,6 +9,8 @@ const ADD_PREV_CHATOBJLIST = 'room/ADD_PREV_CHATOBJLIST';
 // 최신 채팅을 가져올경우, id, obj 둘다 설정
 const ADD_REAL_CHAT = 'room/ADD_REAL_CHAT';
 
+const ROOM_RESET = 'room/RESET';
+
 export const initRoom = (data) => ({
 	type: INIT_ROOM,
 	data,
@@ -37,7 +39,10 @@ export const addRealChat = (roomId, chat) => ({
 	type: ADD_REAL_CHAT,
 	data: { roomId, chat },
 });
-
+export const roomReset = () => ({
+	type: ROOM_RESET,
+	data: {},
+});
 const initialState = new Map();
 
 export default function room(state = initialState, action) {
@@ -96,6 +101,8 @@ export default function room(state = initialState, action) {
 			obj.recentChat = action.data.chat.message;
 			newMap.set(String(action.data.roomId), obj);
 			return newMap;
+		case ROOM_RESET:
+			return new Map();
 		default:
 			return state;
 	}
