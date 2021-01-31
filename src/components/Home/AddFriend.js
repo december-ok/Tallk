@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { getUserEmail } from '../../apiController';
 
 function AddFriend() {
-	const link =
-		'https://upload.wikimedia.org/wikipedia/commons/c/c1/Lionel_Messi_20180626.jpg';
 	const [searchUser, setSearchUser] = useState();
 	const emailInput = useRef();
 	const searchUserEmail = async () => {
@@ -33,7 +31,7 @@ function AddFriend() {
 				{!searchUser && <h4>No Result</h4>}
 				{searchUser && (
 					<>
-						<img src={link} />
+						<img src={searchUser.avatarUrl} />
 						<h4>{searchUser.userName}</h4>
 						<button>AddFriend</button>
 					</>

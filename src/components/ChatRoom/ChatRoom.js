@@ -17,6 +17,7 @@ function ChatRoom() {
 
 	const { id } = useParams();
 	const inputBox = useRef();
+	const optionDiv = useRef();
 	const info = store.room.get(id);
 	const [chatLoaded, setChatLoaded] = useState(false);
 
@@ -47,22 +48,33 @@ function ChatRoom() {
 
 		if (document.querySelector('.Navigation'))
 			document.querySelector('.Navigation').style.display = 'none';
+
+		document.body.style.overflowX = 'hidden';
+
 		return () => {
 			if (document.querySelector('.Navigation'))
 				document.querySelector('.Navigation').style.display = '';
+
+			document.body.style.overflowX = '';
 		};
 	}, []);
 
 	const sendChat = () => {
-		Websocket.send({
-			type: 'sendRealTimeChat',
-			data: {
-				userId: store.user._id,
-				roomId: info._id,
-				chat: inputBox.current.value,
-			},
-		});
-		inputBox.current.value = '';
+		if (inputBox.current.value.trim() !== '') {
+			Websocket.send({
+				type: 'sendRealTimeChat',
+				data: {
+					userId: store.user._id,
+					roomId: info._id,
+					chat: inputBox.current.value,
+				},
+			});
+			inputBox.current.value = '';
+		}
+	};
+
+	const showOption = () => {
+		optionDiv.current.classList.toggle('Show');
 	};
 
 	const exitRoom = async () => {
@@ -91,7 +103,7 @@ function ChatRoom() {
 								<i className="fas fa-chevron-left" />
 							</button>
 							<span className="ChatRoomName">{info.roomName}</span>
-							<button>
+							<button onClick={showOption}>
 								<i className="fas fa-bars" />
 							</button>
 						</div>
@@ -112,7 +124,10 @@ function ChatRoom() {
 							</button>
 						</div>
 					</div>
-					<div className="ChatRoomOption">
+					<div className="ChatRoomOption" ref={optionDiv}>
+						<button onClick={showOption}>
+							<i className="fas fa-bars" />
+						</button>
 						<h3>Chat Option</h3>
 						<h4>Users</h4>
 						{

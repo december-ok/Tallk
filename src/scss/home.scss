@@ -1,6 +1,6 @@
 .HomeHeader {
 	display: grid;
-	grid-template-columns: 100fr 1fr;
+	grid-template-columns: 999fr 1fr;
 
 	height: 70px;
 }
@@ -15,7 +15,7 @@
 
 .ProfileBlock {
 	display: grid;
-	grid-template-columns: 1fr 10fr;
+	grid-template-columns: 1fr 999fr;
 	grid-template-rows: 3fr 2fr;
 	height: 50px;
 	margin: 10px 3px;
