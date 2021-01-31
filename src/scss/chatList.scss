@@ -36,6 +36,14 @@
 	h5 {
 		margin: auto 0;
 		margin-left: 5px;
+		display: inline;
+	}
+	em {
+		color: white;
+		font-weight: bold;
+		background-color: rgb(255, 161, 161);
+		border-radius: 50%;
+		padding: 0px 5px;
 	}
 }
 .AddChatPopup {

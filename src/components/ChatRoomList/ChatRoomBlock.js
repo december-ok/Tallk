@@ -13,7 +13,10 @@ function ChatRoomBlock({ info }) {
 					<i className="fas fa-user" />
 					<span>{info.userList.length}</span>
 				</div>
-				<h5>{info.recentChat}</h5>
+				<div>
+					<h5>{info.recentChat}</h5>
+					<em>{`5`}</em>
+				</div>
 			</div>
 		</Link>
 	);
