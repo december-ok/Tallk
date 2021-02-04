@@ -15,7 +15,7 @@ function ChatRoomBlock({ info }) {
 				</div>
 				<div>
 					<h5>{info.recentChat}</h5>
-					<em>{`5`}</em>
+					<span class="Notice">{`5`}</span>
 				</div>
 			</div>
 		</Link>

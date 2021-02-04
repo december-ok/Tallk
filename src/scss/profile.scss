@@ -1,0 +1,44 @@
+.Profile {
+	.Screen {
+		position: absolute;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+		object-fit: cover;
+		z-index: -1;
+	}
+	.ProfileMain {
+		background-color: rgba(255, 255, 255, 0.6);
+		height: 100vh;
+	}
+}
+.ProfileHeader {
+	display: grid;
+	grid-template-columns: 1fr 999fr 1fr;
+	height: 70px;
+	i {
+		font-size: 22px;
+	}
+}
+
+.UserInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	img {
+		object-fit: cover;
+		width: 90px;
+		height: 90px;
+		border-radius: 37%;
+	}
+}
+
+.UserAction {
+	display: flex;
+	justify-content: center;
+	button {
+		i {
+			font-size: 40px;
+		}
+	}
+}
